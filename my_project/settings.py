@@ -2,7 +2,12 @@ from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
-    import env
+     import env
+
+import os
+
+print(os.environ.get("DATABASE_URL"))
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
