@@ -1,17 +1,28 @@
 from pathlib import Path
 import os
 import dj_database_url
+
 if os.path.isfile('env.py'):
-     import env
+    import env
+
+
+database_url = os.environ.get("DATABASE_URL")
+if isinstance(database_url, bytes):
+    database_url = database_url.decode("utf-8")
+
+
+DATABASES = {
+    'default': dj_database_url.parse(database_url)
+}
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-default-key')
 
-DEBUG = 'false'
+DEBUG = False  
 
-ALLOWED_HOSTS = ['8000-rosencrantzart-holidai-7vw3vsg5ffm.ws-eu115.gitpod.io','.herokuapp.com']
+ALLOWED_HOSTS = ['8000-rosencrantzart-holidai-7vw3vsg5ffm.ws-eu115.gitpod.io', '.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,31 +64,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
-#DATABASES = {
-#   'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#      'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'  # Statisk URL-sökväg
 
 LANGUAGE_CODE = 'sv-se'
 
@@ -86,9 +74,5 @@ TIME_ZONE = 'Europe/Stockholm'
 USE_I18N = True
 
 USE_TZ = True
-
-STATIC_URL = 'static/'
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
