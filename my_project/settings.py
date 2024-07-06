@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import dj_database_url
+if os.path.isfile('env.py'):
+    import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,12 +52,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#DATABASES = {
+#   'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#      'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
