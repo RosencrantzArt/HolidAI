@@ -4,16 +4,12 @@ import dj_database_url
 if os.path.isfile('env.py'):
      import env
 
-import os
-
-print(os.environ.get("DATABASE_URL"))
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-default-key')
 
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = 'false'
 
 ALLOWED_HOSTS = ['8000-rosencrantzart-holidai-7vw3vsg5ffm.ws-eu115.gitpod.io','.herokuapp.com']
 
